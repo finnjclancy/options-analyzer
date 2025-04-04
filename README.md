@@ -1,6 +1,6 @@
 # Options Strategy Analyzer
 
-A tool for analyzing and visualizing profit/loss scenarios for different options strategies, featuring both a Python CLI and a modern Next.js web interface.
+A Python command-line tool for analyzing profit/loss scenarios for different options strategies.
 
 ## Features
 
@@ -11,48 +11,57 @@ A tool for analyzing and visualizing profit/loss scenarios for different options
   - Covered Calls
   - Cash-Secured Puts
 - Interactive selection of expiration dates and strikes
-- Visual profit/loss analysis
 - Filter options by investment amount and expected price
 - Calculate annualized returns based on target prices
+- Tabular display of options data and analysis results
 
-## Architecture
+## Detailed Installation Guide
 
-This project consists of two main components:
+### Step 1: Clone the Repository
 
-### 1. Python Backend
+Clone this repository using one of the following methods:
 
-A standalone command-line tool that can be used independently to analyze options strategies.
+**Using HTTPS:**
+```bash
+git clone https://github.com/finnjclancy/options-analyzer.git
+cd options-analyzer
+```
 
-### 2. Next.js Frontend (New!)
+**Using SSH (if you have SSH keys set up):**
+```bash
+git clone git@github.com:finnjclancy/options-analyzer.git
+cd options-analyzer
+```
 
-A modern web interface built with Next.js that provides a user-friendly way to interact with the options analyzer.
+**Using GitHub CLI:**
+```bash
+gh repo clone finnjclancy/options-analyzer
+cd options-analyzer
+```
 
-## Installation
+### Step 2: Set Up a Python Environment (Optional but Recommended)
 
-### Option 1: Python CLI Only
+Create and activate a virtual environment:
 
-1. Clone this repository
-2. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+```bash
+# Using venv (Python built-in)
+python -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 
-### Option 2: Full Stack (Python + Next.js)
+# Or using conda
+conda create -n options-env python=3.9
+conda activate options-env
+```
 
-1. Clone this repository
-2. Install Python dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-3. Install Node.js dependencies:
-   ```
-   cd frontend
-   npm install
-   ```
+### Step 3: Install Dependencies
+
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
-
-### Python CLI
 
 Run the script:
 ```
@@ -66,62 +75,243 @@ Follow the interactive prompts to:
 4. Enter investment amount and expected price
 5. View filtered options and analysis
 
-### Next.js Web Interface
-
-Start the development server:
-```
-cd frontend
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser and follow the intuitive interface to:
-1. Enter a ticker symbol
-2. Select an expiration date 
-3. Choose a strategy
-4. Enter investment details
-5. View filtered options ranked by expected return
-6. Select an option to see detailed analysis
-
-## Example (CLI)
+## Example Output
 
 ```
-Options Strategy Analyzer
-------------------------
-Enter ticker symbol: AAPL
-Current price for AAPL: $191.52
+══════════════════════════════════════════════════════════════════════
+                   OPTIONS STRATEGY ANALYZER
+══════════════════════════════════════════════════════════════════════
 
-Available expiration dates:
-1. 2024-06-21
-2. 2024-06-28
-...
+📱 This tool helps you analyze options strategies and find contracts
+   that match your investment criteria.
 
-Select expiration date (number): 1
-Selected expiration: 2024-06-21
+📊 Supported strategies:
+   c:   Call          - Buy call options
+   p:   Put           - Buy put options
+   cc:  Covered Call  - Own stock and sell call options
+   csp: Cash Secured Put - Sell put options with cash as collateral
 
-Available strategies:
-1. call
-2. put
-3. covered_call
-4. cash_secured_put
+🔍 The tool will guide you through the following steps:
+   1. Enter a stock ticker symbol
+   2. Select an options expiration date
+   3. Choose a strategy
+   4. Enter investment amount
+   5. Optionally filter by specific strike price
+   6. View matching options and analysis
 
-Select strategy (number): 3
-Selected strategy: covered_call
+🚀 Let's get started!
+──────────────────────────────────────────────────────────────────────
 
-Available call strike prices:
-1. 180.0
-2. 185.0
-...
+📈 Enter ticker symbol: AAPL
 
-Select call strike price (number): 5
+📊 Fetching data for AAPL...
+💲 Current price for AAPL: $188.38
+
+📅 Retrieving available options expiration dates...
+✅ Found 21 expiration dates.
+
+📅 Available expiration dates:
+┌─────┬────────────┐
+│ Num │ Date       │
+├─────┼────────────┤
+│ 1   │ 2025-04-04 │
+│ 2   │ 2025-04-11 │
+│ 3   │ 2025-04-17 │
+│ 4   │ 2025-04-25 │
+│ 5   │ 2025-05-02 │
+│ 6   │ 2025-05-09 │
+│ 7   │ 2025-05-16 │
+│ 8   │ 2025-05-23 │
+│ 9   │ 2025-06-20 │
+│ 10  │ 2025-07-18 │
+│ 11  │ 2025-08-15 │
+│ 12  │ 2025-09-19 │
+│ 13  │ 2025-10-17 │
+│ 14  │ 2025-12-19 │
+│ 15  │ 2026-01-16 │
+│ 16  │ 2026-03-20 │
+│ 17  │ 2026-06-18 │
+│ 18  │ 2026-12-18 │
+│ 19  │ 2027-01-15 │
+│ 20  │ 2027-06-17 │
+│ 21  │ 2027-12-17 │
+└─────┴────────────┘
+
+You can either:
+1️⃣ Enter a number to select from the list above
+2️⃣ Enter a date in YYYY-MM-DD format to find the closest expiration date
+
+➡️ Enter selection (number or date): 2027-01-01
+✅ Closest expiration to 2027-01-01 is 2026-12-18 (14 days difference)
+📅 Selected expiration: 2026-12-18
+
+🔍 Fetching options chain for 2026-12-18...
+✅ Found 62 call options and 56 put options.
+
+📊 Available strategies:
+┏━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Code ┃ Description                                        ┃
+┣━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ c    ┃ Buy a call option to profit from stock price in... ┃
+┃ p    ┃ Buy a put option to profit from stock price dec... ┃
+┃ cc   ┃ Own stock and sell a call option for income        ┃
+┃ csp  ┃ Sell a put option with cash as collateral          ┃
+┗━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+➡️ Select strategy (c/p/cc/csp): c
+✅ Selected strategy: call
+
+💵 Enter the maximum amount you're willing to invest per contract ($): 10000
+
+🔮 Enter your expected price for AAPL at expiration: $230
+
+📊 Options sorted by highest annualized return if $230.00 is reached:
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|   Num | Strike   | Premium   | Breakeven   | Profit   | Return %   | Annual Return   |   Volume |   Open Int |
++=======+==========+===========+=============+==========+============+=================+==========+============+
+|     1 | $150.00  | $59.77    | $209.77     | $20.23   | 33.85%     | 18.62%          |       34 |        753 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     2 | $110.00  | $90.00    | $200.00     | $30.00   | 33.33%     | 18.36%          |        1 |        591 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     3 | $145.00  | $63.80    | $208.80     | $21.20   | 33.23%     | 18.30%          |       22 |        211 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     4 | $135.00  | $71.72    | $206.72     | $23.28   | 32.46%     | 17.90%          |        3 |        664 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     5 | $100.00  | $98.18    | $198.18     | $31.82   | 32.41%     | 17.88%          |        3 |       1756 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     6 | $140.00  | $68.07    | $208.07     | $21.93   | 32.22%     | 17.78%          |        8 |        673 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     7 | $165.00  | $50.00    | $215.00     | $15.00   | 30.00%     | 16.62%          |        3 |        390 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     8 | $160.00  | $54.71    | $214.71     | $15.29   | 27.95%     | 15.53%          |        1 |        928 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|     9 | $155.00  | $59.11    | $214.11     | $15.89   | 26.88%     | 14.97%          |        5 |        298 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    10 | $175.00  | $43.74    | $218.74     | $11.26   | 25.74%     | 14.36%          |       44 |        891 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    11 | $180.00  | $40.84    | $220.84     | $9.16    | 22.43%     | 12.59%          |      160 |       1138 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    12 | $120.00  | $90.00    | $210.00     | $20.00   | 22.22%     | 12.48%          |        1 |       1269 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    13 | $185.00  | $38.34    | $223.34     | $6.66    | 17.37%     | 9.84%           |        8 |       1210 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    14 | $125.00  | $89.53    | $214.53     | $15.47   | 17.28%     | 9.79%           |      160 |        353 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    15 | $115.00  | $98.50    | $213.50     | $16.50   | 16.75%     | 9.50%           |        4 |        150 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    16 | $170.00  | $51.70    | $221.70     | $8.30    | 16.05%     | 9.11%           |        3 |       1088 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    17 | $190.00  | $36.00    | $226.00     | $4.00    | 11.11%     | 6.37%           |       39 |       1099 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    18 | $195.00  | $32.60    | $227.60     | $2.40    | 7.36%      | 4.25%           |       56 |       1018 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    19 | $130.00  | $96.55    | $226.55     | $3.45    | 3.57%      | 2.08%           |       13 |       1421 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    20 | $200.00  | $30.73    | $230.73     | $-0.73   | -2.38%     | -1.40%          |      473 |       4926 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    21 | $210.00  | $28.02    | $238.02     | $-8.02   | -28.62%    | -17.93%         |      219 |       2927 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    22 | $220.00  | $23.70    | $243.70     | $-13.70  | -57.81%    | -39.68%         |      185 |       2917 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    23 | $230.00  | $19.17    | $249.17     | $-19.17  | -100.00%   | -100.00%        |      284 |       3579 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    24 | $240.00  | $16.14    | $256.14     | $-16.14  | -100.00%   | -100.00%        |       32 |       4790 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    25 | $250.00  | $13.30    | $263.30     | $-13.30  | -100.00%   | -100.00%        |     1835 |      12005 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    26 | $260.00  | $11.20    | $271.20     | $-11.20  | -100.00%   | -100.00%        |      245 |       3139 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    27 | $270.00  | $9.40     | $279.40     | $-9.40   | -100.00%   | -100.00%        |      792 |       3179 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    28 | $280.00  | $7.72     | $287.72     | $-7.72   | -100.00%   | -100.00%        |       42 |       3180 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    29 | $290.00  | $6.30     | $296.30     | $-6.30   | -100.00%   | -100.00%        |      208 |       3239 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    30 | $300.00  | $5.20     | $305.20     | $-5.20   | -100.00%   | -100.00%        |      206 |       4046 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    31 | $310.00  | $4.40     | $314.40     | $-4.40   | -100.00%   | -100.00%        |       22 |        441 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    32 | $320.00  | $3.60     | $323.60     | $-3.60   | -100.00%   | -100.00%        |       32 |       2286 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    33 | $330.00  | $3.25     | $333.25     | $-3.25   | -100.00%   | -100.00%        |      118 |        827 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    34 | $340.00  | $2.70     | $342.70     | $-2.70   | -100.00%   | -100.00%        |        1 |        652 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    35 | $350.00  | $2.00     | $352.00     | $-2.00   | -100.00%   | -100.00%        |       35 |       4171 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    36 | $360.00  | $1.81     | $361.81     | $-1.81   | -100.00%   | -100.00%        |        7 |        224 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    37 | $370.00  | $1.96     | $371.96     | $-1.96   | -100.00%   | -100.00%        |        2 |        177 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    38 | $380.00  | $1.34     | $381.34     | $-1.34   | -100.00%   | -100.00%        |        5 |         80 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    39 | $390.00  | $1.00     | $391.00     | $-1.00   | -100.00%   | -100.00%        |        6 |        114 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    40 | $400.00  | $1.06     | $401.06     | $-1.06   | -100.00%   | -100.00%        |        2 |        270 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    41 | $410.00  | $0.90     | $410.90     | $-0.90   | -100.00%   | -100.00%        |        4 |        262 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    42 | $420.00  | $0.75     | $420.75     | $-0.75   | -100.00%   | -100.00%        |       44 |        360 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    43 | $430.00  | $0.67     | $430.67     | $-0.67   | -100.00%   | -100.00%        |        2 |        236 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    44 | $440.00  | $0.60     | $440.60     | $-0.60   | -100.00%   | -100.00%        |        4 |         34 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+|    45 | $450.00  | $0.58     | $450.58     | $-0.58   | -100.00%   | -100.00%        |      282 |       1615 |
++-------+----------+-----------+-------------+----------+------------+-----------------+----------+------------+
+
+📝 These options are sorted by annualized return if the stock reaches
+   $230.00 by expiration. Higher returns may involve higher risks.
+
+➡️ Select an option by number (1 to 45) or 'q' to quit: 1
+
+📊 Strategy Analysis
+═══════════════════
+
+📈 Strategy Summary - Long Call:
+   Strike Price: $150.0
+   Premium Paid: $59.77
+   Breakeven Price: $209.77
+   Maximum Loss: $59.77 (if stock price is below $150.0 at expiration)
+   Maximum Profit: Unlimited (increases as stock price rises above breakeven)
+
+══════════════════════════════════════════════════════════════════════
+📊 ANALYSIS RESULTS FOR EXPECTED FUTURE PRICE: $230.00
+══════════════════════════════════════════════════════════════════════
+Strategy: Long Call
+Days until expiration: 623
+
+Call Strike: $150.0
+Premium Paid: $59.77
+
+At your expected price of $230.00:
+Option Value at Expiration: $80.00
+Profit/Loss: $20.23
+Percentage Return: 33.85%
+Annualized Return: 18.62%
+
+Note: These calculations assume holding until expiration.
+══════════════════════════════════════════════════════════════════════
 ```
 
-A matplotlib chart will display showing the P&L profile for the selected strategy. 
+After selecting the options, you'll see a detailed analysis of the selected strategy with profit/loss metrics for your expected price target.
+
+## Troubleshooting
+
+If you encounter issues:
+
+1. **Yahoo Finance API limitations**: The API may occasionally have rate limits or data availability issues. Try again later or check if the ticker symbol is correct.
+
+2. **Python version compatibility**: This tool has been tested with Python 3.8+. If you're using an older version, you might encounter compatibility issues.
+
+3. **Package conflicts**: If you're having dependency issues, try creating a fresh virtual environment before installation.
 
 ## Technologies
 
-- **Backend**: Python, yfinance, pandas, matplotlib
-- **Frontend**: Next.js, React, Tailwind CSS
-- **API**: REST endpoints connecting the frontend to the Python backend
+- Python
+- yfinance
+- pandas
+- tabulate
 
 ## License
 
